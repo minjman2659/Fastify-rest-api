@@ -7,7 +7,9 @@
     "outDir": "./build",
     "sourceMap": true,
     "baseUrl": "./src",
-    "moduleResolution": "node"
+    "moduleResolution": "node",
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true
   },
   "include": ["./src/**/*"],
   "exclude": ["node_modules"]
