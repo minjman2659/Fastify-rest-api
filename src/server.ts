@@ -1,4 +1,8 @@
-import fastify from 'fastify';
+import fastify, { FastifyRequest } from 'fastify';
+
+import User from 'entity/User';
+import { hashPassword } from 'lib';
+import { IUser } from 'types/user';
 
 export default class Server {
   app = fastify({ logger: true });
@@ -11,6 +15,19 @@ export default class Server {
     this.app.get('/', async () => {
       return { hello: 'world' };
     });
+    this.app.post(
+      '/auth/register',
+      async (req: FastifyRequest<{ Body: IUser }>, reply) => {
+        const { email, username, password } = req.body;
+        const user = User.create({
+          email,
+          username,
+          password: hashPassword(password),
+        });
+
+        reply.send(user);
+      }
+    );
   }
 
   start(PORT: string) {

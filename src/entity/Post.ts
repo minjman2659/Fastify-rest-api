@@ -1,10 +1,22 @@
-import { Entity, Column, Index, ManyToOne } from 'typeorm';
+import {
+  BaseEntity,
+  PrimaryGeneratedColumn,
+  Entity,
+  CreateDateColumn,
+  UpdateDateColumn,
+  Column,
+  Index,
+  ManyToOne,
+} from 'typeorm';
 import { Length } from 'class-validator';
-import Common from './Common';
 import User from './User';
 
-@Entity()
-export default class Post extends Common {
+@Entity('Post')
+export default class Post extends BaseEntity {
+  @Index()
+  @PrimaryGeneratedColumn('uuid')
+  id!: string;
+
   @Column()
   @Length(100)
   title!: string;
@@ -14,6 +26,14 @@ export default class Post extends Common {
 
   @Column({ length: 255, nullable: true })
   thumbnail!: string;
+
+  @Column()
+  @CreateDateColumn()
+  createdAt!: Date;
+
+  @Column()
+  @UpdateDateColumn()
+  updatedAt!: Date;
 
   @Index()
   @ManyToOne((type) => User, { cascade: true, nullable: false })
