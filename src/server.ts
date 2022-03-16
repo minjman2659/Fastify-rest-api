@@ -19,10 +19,10 @@ export default class Server {
       '/auth/register',
       async (req: FastifyRequest<{ Body: IUser }>, reply) => {
         const { email, username, password } = req.body;
-        const user = User.create({
+        const user = await User.register({
           email,
           username,
-          password: hashPassword(password),
+          password,
         });
 
         reply.send(user);
