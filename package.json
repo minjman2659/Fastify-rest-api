@@ -7,13 +7,16 @@
   "author": "minjman2659 <minjman2659@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "dev": "cross-env NODE_PATH=src nodemon --watch 'src/**/*' -e ts,tsx --exec ts-node src/index.ts"
+    "dev": "cross-env NODE_PATH=src nodemon --watch 'src/**/*' -e ts,tsx --exec ts-node src/server.ts"
   },
   "devDependencies": {
     "@types/dotenv": "^8.2.0",
+    "@types/jsonwebtoken": "^8.5.8",
+    "@types/lodash": "^4.14.180",
     "@types/node": "^17.0.21",
     "eslint": "^8.11.0",
     "eslint-config-prettier": "^8.5.0",
+    "fastify-cookie": "^5.6.0",
     "nodemon": "^2.0.15",
     "pg": "^8.7.3",
     "reflect-metadata": "^0.1.13",
@@ -21,10 +24,11 @@
     "typescript": "^4.6.2"
   },
   "dependencies": {
-    "class-validator": "^0.13.2",
     "cross-env": "^7.0.3",
     "dotenv": "^16.0.0",
     "fastify": "^3.27.4",
+    "jsonwebtoken": "^8.5.1",
+    "lodash": "^4.17.21",
     "typeorm": "^0.2.45"
   }
 }

@@ -9,7 +9,6 @@ import {
   OneToMany,
   getConnection,
 } from 'typeorm';
-import { IsEmail, Max, Min } from 'class-validator';
 import Post from './Post';
 
 import { IUser } from 'types/user';
@@ -23,15 +22,12 @@ export default class User extends BaseEntity {
 
   @Index()
   @Column({ unique: true })
-  @IsEmail()
   email!: string;
 
   @Column({ length: 255 })
   username!: string;
 
   @Column()
-  @Min(4)
-  @Max(10)
   password!: string;
 
   @CreateDateColumn()
@@ -65,4 +61,25 @@ export default class User extends BaseEntity {
       await queryRunner.release();
     }
   }
+
+  static async checkEmail(email: string): Promise<boolean> {
+    try {
+      const user = await User.findOne({ email });
+      return user ? true : false;
+    } catch (err) {
+      throw new Error(err);
+    }
+  }
+
+  // instance methods
+  generateUserToken: () => Promise<{ refreshToken: any; accessToken: any }>;
+
+  refreshUserToken: (
+    refreshTokenExp: number,
+    originalRefreshToken: any
+  ) => Promise<{ refreshToken: any; accessToken: any }>;
+
+  validatePassword: (password: string) => boolean;
+
+  toRes: () => any;
 }

@@ -8,7 +8,6 @@ import {
   Index,
   ManyToOne,
 } from 'typeorm';
-import { Length } from 'class-validator';
 import User from './User';
 
 @Entity('Post')
@@ -18,7 +17,6 @@ export default class Post extends BaseEntity {
   id!: string;
 
   @Column()
-  @Length(100)
   title!: string;
 
   @Column('text')
