@@ -15,7 +15,6 @@ const config: ConnectionOptions = {
 
 export default class Database {
   async getConnection(): Promise<void> {
-    console.log(config);
     try {
       await createConnection(config);
       console.log('DB connection is established');
