@@ -2,7 +2,7 @@
   "name": "fastify-rest-api",
   "version": "1.0.0",
   "description": "fastify-rest-api",
-  "main": "index.js",
+  "main": "server.ts",
   "repository": "https://github.com/minjman2659/Fastify-rest-api.git",
   "author": "minjman2659 <minjman2659@gmail.com>",
   "license": "MIT",
