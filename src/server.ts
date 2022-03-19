@@ -4,6 +4,7 @@ import './env';
 import fastify, { FastifyReply, FastifyRequest } from 'fastify';
 import { FastifyCookieOptions } from 'fastify-cookie';
 import cookie from 'fastify-cookie';
+import { CustomCors } from 'plugins/custom-cors';
 import Database from './database';
 
 import { IUser } from 'types/user';
@@ -17,9 +18,10 @@ if (!PORT || !POSTGRES_HOST) {
 const database: Database = new Database();
 database.getConnection();
 
-async function bootstrap() {
+async function Server() {
   const server = fastify({ logger: false });
 
+  server.register(CustomCors);
   server.register(cookie, {
     secret: process.env.SECRET_KEY,
   } as FastifyCookieOptions);
@@ -28,7 +30,7 @@ async function bootstrap() {
     '/',
     async (req: FastifyRequest<{ Body: IUser }>, reply: FastifyReply) => {
       reply.send('Hello World!');
-    }
+    },
   );
 
   server.listen(process.env.PORT, (err, address) => {
@@ -42,4 +44,4 @@ async function bootstrap() {
   });
 }
 
-bootstrap();
+Server();

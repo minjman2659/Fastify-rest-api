@@ -4,6 +4,7 @@
     "target": "es2021",
     "noImplicitThis": false,
     "noImplicitAny": true,
+    "declaration": true,
     "outDir": "./build",
     "sourceMap": true,
     "baseUrl": "./src",
