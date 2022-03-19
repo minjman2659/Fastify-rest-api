@@ -11,9 +11,6 @@ public/images/*
 # logs
 yarn-error.log
 
-# db info
-src/database/config/sequelize-cli.json
-
 # test
 coverage
 
