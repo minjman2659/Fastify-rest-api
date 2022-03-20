@@ -1,13 +1,12 @@
 import 'reflect-metadata';
 import './env';
 
-import fastify, { FastifyReply, FastifyRequest } from 'fastify';
+import fastify from 'fastify';
 import { FastifyCookieOptions } from 'fastify-cookie';
 import cookie from 'fastify-cookie';
 import { CustomCors } from 'plugins/custom-cors';
 import Database from './database';
-
-import { IUser } from 'types/user';
+import routes from 'routes';
 
 const { PORT, POSTGRES_HOST } = process.env;
 
@@ -26,12 +25,7 @@ async function Server() {
     secret: process.env.SECRET_KEY,
   } as FastifyCookieOptions);
 
-  server.get(
-    '/',
-    async (req: FastifyRequest<{ Body: IUser }>, reply: FastifyReply) => {
-      reply.send('Hello World!');
-    },
-  );
+  server.register(routes, { prefix: '/api' });
 
   server.listen(process.env.PORT, (err, address) => {
     if (err) {
